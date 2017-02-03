@@ -2,7 +2,13 @@
 
 ## Usage
 
-* Just create array of instances of AnimationClosure and call animateSequence
+* Create instance of SequenceAnimator
+
+```swift 
+        var animator = SequenceAnimator()
+```
+
+* Then create array of instances of AnimationClosure and call animateSequence
 
 ```swift 
         let view1 = UIView()
@@ -17,7 +23,7 @@
             view2.alpha = 1
         }
 
-        SequenceAnimator().animateSequence(animationEvents: [closure1, 1, closure2], completion: nil)
+        animator.animateSequence(animationEvents: [closure1, 1, closure2], completion: nil)
 
 ```
 
@@ -26,12 +32,12 @@
 ```swift 
         let view = UIView()
         let view2 = UIView()
-        let blocks = generateAnimatedBlocksFrom(collection: [view, view2], forDuration: 1) { (view) in
+        let blocks = animator.generateAnimatedBlocksFrom(collection: [view, view2], forDuration: 1) { (view) in
             view.alpha = 0.5
         }
-        animateSequence(animationEvents: blocks.shuffled(), completion: nil)
+        animator.animateSequence(animationEvents: blocks.shuffled(), completion: nil)
         // OR
-        animateSequence(animationEvents: blocks, interval: 1, pauseInterval: 1, completion: nil)
+        animator.animateSequence(animationEvents: blocks, interval: 1, pauseInterval: 1, completion: nil)
 ```
 
 * if you want to do some preparation before animation call prepareViews(_ views: [UIView]..., withBlock preparationBlock: AnimationBlock)
@@ -41,7 +47,7 @@
         let view = UIView()
         let view2 = UIView()
 
-        prepareViews([view, view2]) { (view) in
+        animator.prepareViews([view, view2]) { (view) in
             view.alpha = 0
         }
 
